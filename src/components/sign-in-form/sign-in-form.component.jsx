@@ -3,16 +3,16 @@ import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
-import { singInWithGooglePopup, createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
-import "./sign-in-form.styles.scss";
-import { GoogleSignInButton } from "../button/button.styles";
+import { singInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
+
+import { SignInContainer, ButtonsContainer } from "./sign-in-form.styles";
 
 const defaultFormFields = {
     email: '',
     password: '',
 };
 
-const SignUpForm = () => {
+const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
@@ -24,7 +24,7 @@ const SignUpForm = () => {
         event.preventDefault();
 
         try { 
-            const user = await signInAuthUserWithEmailAndPassword(email, password)
+            await signInAuthUserWithEmailAndPassword(email, password)
             resetFormFields();
         } catch(error) {   
             switch(error.code){
@@ -52,7 +52,7 @@ const SignUpForm = () => {
     }
 
     return (
-        <div className="sign-up-container">
+        <SignInContainer>
             <h2>Already have an account?</h2>
             <h1>Sign in with your email and password</h1>
             <form onSubmit={handleSubmit}>
@@ -73,13 +73,13 @@ const SignUpForm = () => {
                     name="password" 
                     value={password}
                 />
-                <div className="buttons-container">
+                <ButtonsContainer>
                 <Button type='submit'>Sign In</Button>
                 <Button type='button' buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>Google Sign In</Button>
-                </div>
+                </ButtonsContainer>
             </form>
-        </div>
+        </SignInContainer>
     )
 }
 
-export default SignUpForm;
+export default SignInForm;
