@@ -23,7 +23,7 @@ export const FormInputLabel = styled.label`
 `;
 
 export const Input = styled.input`
-b   ackground: none;
+    background: none;
     background-color: white;
     color: ${subColor};
     font-size: 18px;
