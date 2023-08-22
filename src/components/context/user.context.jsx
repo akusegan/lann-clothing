@@ -15,8 +15,6 @@ export const USER_ACTION_TYPES = {
 }
 
 const userReducer = (state, action) => {
-    console.log('dispatched')
-    console.log(action);
     const { type, payload } = action;
 
     switch(type) {
@@ -36,7 +34,6 @@ const INITIAL_STATE = {
 
 export const UserProvider =({ children }) => {
     const [ { currentUser }, dispatch ] = useReducer(userReducer, INITIAL_STATE);
-    console.log(currentUser);
 
     const setCurrentUser = (user) => {
         dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user });
